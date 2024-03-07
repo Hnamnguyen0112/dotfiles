@@ -17,6 +17,7 @@ if not typescript_setup then
 end
 
 local keymap = vim.keymap -- for conciseness
+local util = require("lspconfig/util")
 
 -- enable keybinds only for when lsp server available
 local on_attach = function(client, bufnr)
@@ -70,6 +71,18 @@ typescript.setup({
 	},
 })
 
+-- configure pyright server
+lspconfig["pyright"].setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+})
+
+-- configure clangd server
+lspconfig["clangd"].setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+})
+
 -- configure css server
 lspconfig["cssls"].setup({
 	capabilities = capabilities,
@@ -110,6 +123,24 @@ lspconfig["lua_ls"].setup({
 					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
 					[vim.fn.stdpath("config") .. "/lua"] = true,
 				},
+			},
+		},
+	},
+})
+
+-- configure gopls server
+lspconfig.gopls.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+	cmd = { "gopls" },
+	filetypes = { "go", "gomod", "gowork", "gotmpl" },
+	root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+	settings = {
+		gopls = {
+			completeUnimported = true,
+			usePlaceholders = true,
+			analyses = {
+				unusedparams = true,
 			},
 		},
 	},

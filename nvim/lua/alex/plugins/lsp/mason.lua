@@ -29,6 +29,13 @@ mason_lspconfig.setup({
 		"lua_ls",
 		"emmet_ls",
 		"efm",
+		"clangd",
+		"terraformls",
+		"rust_analyzer",
+		"pyright",
+		"graphql",
+		"gopls",
+		"dockerls",
 	},
 	-- auto-install configured servers (with lspconfig)
 	automatic_installation = true, -- not the same as ensure_installed

@@ -20,6 +20,9 @@ null_ls.setup({
 		formatting.prettier.with({ disabled_filetypes = { "yaml" } }), -- js/ts formatter
 		formatting.stylua, -- lua formatter
 		diagnostics.eslint_d,
+		null_ls.builtins.formatting.gofumpt,
+		null_ls.builtins.formatting.goimports_reviser,
+		null_ls.builtins.formatting.golines,
 	},
 	-- configure format on save
 	on_attach = function(current_client, bufnr)
